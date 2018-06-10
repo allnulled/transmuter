@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Transmuter Test</title>
+	<link rel="stylesheet" type="text/css" href="../node_modules/qunit/qunit/qunit.css" />
+	<script src="../dist/transmuter.js"></script>
+	<script src="../node_modules/qunit/qunit/qunit.js"></script>
+</head>
+<body>
+
+<div id="qunit"></div>
+
+<script type="text/javascript">
+	const transmuter = new TransmuterAPI.Transmuter()
+		.when(x => x instanceof Array && x.length === 10)
+		.gives(x => x[5])
+		.when(x => x instanceof Array && x.length < 3)
+		.when(x => x instanceof Array && x.length > 4)
+		.gives(x => x[0])
+		.when(x => x instanceof Array)
+		.gives(x => x[1])
+		.when(x => typeof x === "boolean")
+		.gives(x => !x)
+		.when(x => typeof x === "string" && x.startsWith("::"))
+		.gives(x => x.substr(2))
+		.when(x => typeof x === "string")
+		.gives(x => x.substr(0, 5))
+		.when(x => typeof x === "number")
+		.gives(x => x + 5)
+		.others(x => x);
+	QUnit.test("Transmuter function test for browsers", function(assert) {
+	  assert.ok(transmuter.get(800) === 805, "");
+		assert.ok(transmuter.get(0) === 5, "");
+		assert.ok(transmuter.get(true) === false, "");
+		assert.ok(transmuter.get([100, 200]) === 100, "");
+		assert.ok(transmuter.get([100, 200, 300]) === 200, "");
+		assert.ok(transmuter.get([100, 200, 300, 400]) === 200, "");
+		assert.ok(transmuter.get([100, 200, 300, 400, 500]) === 100, "");
+		assert.ok(transmuter.get("0123456789".split("")) === "5", "");
+		assert.ok(transmuter.get("::1234567890") === "1234567890", "");
+		assert.ok(transmuter.get("::Texto entero") === "Texto entero", "");
+		assert.ok(transmuter.get("1234567890") === "12345", "");
+		assert.ok(transmuter.get("abcdefghij") === "abcde", "");
+		assert.ok(transmuter.get(transmuter) === transmuter, "");
+	});
+</script>
+
+
+</body>
+</html>

@@ -140,8 +140,7 @@ About each property:
 
  · **`get`**: accepts any value. Accepts a second value, a `{Function}` that can modify the finally
 returned value (passed to it as its first parameter) just returning the new desired value.
-Returns the final (transmuted) value or, when provided, the value returned by the second parameter, which must
-be a function.
+Returns the final (transmuted) value or, when provided, the value returned by the second parameter passed to this `get` method.
 
 
 **Usage:** 
@@ -230,4 +229,3 @@ and it is usable by Node.js and browser environments.
 
 
 
-# Read this file
