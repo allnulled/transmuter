@@ -4,6 +4,11 @@
  *
  * # transmuter
  *
+ *
+ * ![](https://img.shields.io/badge/trasnmuter-v1.0.0-green.svg) ![](https://img.shields.io/badge/tests-passing-green.svg) ![](https://img.shields.io/badge/coverage-100%25-green.svg)  ![](https://img.shields.io/badge/stable-95%25-green.svg)
+ *
+ *
+ *
  * Transform any value into any other value, in a comfortable, intuitive and fully-functional way. For Node.js or the browser.
  * Minimalistic library.
  *
